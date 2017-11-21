@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java基础," />
+  <meta name="keywords" content="java数据结构," />
 
 
 
@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="史上最好理解的java接口回调">
-<meta name="keywords" content="java基础">
+<meta name="description" content="散列之分离链接法">
+<meta name="keywords" content="java数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="史上最好理解的java接口回调">
-<meta property="og:url" content="http://mmsmm.github.io/2017/05/14/史上最好理解的java接口回调/index.html">
+<meta property="og:title" content="散列之分离链接法">
+<meta property="og:url" content="http://mmsmm.github.io/2017/11/21/散列之分离链接法/index.html">
 <meta property="og:site_name" content="mmsmm的Bolg">
-<meta property="og:description" content="史上最好理解的java接口回调">
-<meta property="og:updated_time" content="2017-05-18T16:23:38.640Z">
+<meta property="og:description" content="散列之分离链接法">
+<meta property="og:updated_time" content="2017-11-21T14:23:16.227Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="史上最好理解的java接口回调">
-<meta name="twitter:description" content="史上最好理解的java接口回调">
+<meta name="twitter:title" content="散列之分离链接法">
+<meta name="twitter:description" content="散列之分离链接法">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://mmsmm.github.io/2017/05/14/史上最好理解的java接口回调/"/>
+  <link rel="canonical" href="http://mmsmm.github.io/2017/11/21/散列之分离链接法/"/>
 
 
 
 
 
-  <title>史上最好理解的java接口回调 | mmsmm的Bolg</title>
+  <title>散列之分离链接法 | mmsmm的Bolg</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -264,7 +264,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mmsmm.github.io/2017/05/14/史上最好理解的java接口回调/">
+    <link itemprop="mainEntityOfPage" href="http://mmsmm.github.io/2017/11/21/散列之分离链接法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mmsmm">
@@ -281,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">史上最好理解的java接口回调</h1>
+          <h1 class="post-title" itemprop="name headline">散列之分离链接法</h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T17:56:04+08:00">
-                2017-05-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T22:18:16+08:00">
+                2017-11-21
               </time>
             
 
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/接口回调/" itemprop="url" rel="index">
-                    <span itemprop="name">接口回调</span>
+                  <a href="/categories/散列/" itemprop="url" rel="index">
+                    <span itemprop="name">散列</span>
                   </a>
                 </span>
 
@@ -350,8 +350,9 @@
       
 
       
-        <h2 id="史上最好理解的java接口回调"><a href="#史上最好理解的java接口回调" class="headerlink" title="史上最好理解的java接口回调"></a>史上最好理解的java接口回调</h2><a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">       Student student1 = <span class="keyword">new</span> Student(<span class="string">"张三"</span>);<span class="comment">//生成一个学生对象</span></div><div class="line">       Student student2 = <span class="keyword">new</span> Student(<span class="string">"李四"</span>);</div><div class="line">       Teacher teacher = <span class="keyword">new</span> Teacher();<span class="comment">//生成一个老师对象</span></div><div class="line">       teacher.setContactclass(student1);<span class="comment">//老师接受学生信息</span></div><div class="line">       teacher.init();<span class="comment">//展示信息</span></div><div class="line">       teacher.setContactclass(student2);</div><div class="line">       teacher.init();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Contactclass</span></span>&#123;          <span class="comment">//老师与学生交流的接口（例如手机。。。）</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contact</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 老师类，生成一个接口。</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Contactclass contactclass;      <span class="comment">//老师生成接口对象，PS：毕竟老师得有手机才能接受消息</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContactclass</span><span class="params">(Contactclass contactclass)</span></span>&#123;         <span class="comment">//老师手机接收到的消息</span></div><div class="line">        <span class="keyword">this</span>.contactclass = contactclass;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;             <span class="comment">//展示老师收到的消息</span></div><div class="line">        System.out.print(<span class="string">"老师收到："</span>);</div><div class="line">        contactclass.contact();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 学生类继承接口，才发消息给老师</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Contactclass</span></span>&#123;          <span class="comment">//学生类</span></div><div class="line">    String name;       <span class="comment">//学生名字</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span> </span>&#123;       <span class="comment">//构造函数加载学生名字</span></div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contact</span><span class="params">()</span> </span>&#123;            <span class="comment">//通过接口发送的消息</span></div><div class="line">        System.out.println(name+<span class="string">"的作业"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="散列之分离链接法"><a href="#散列之分离链接法" class="headerlink" title="散列之分离链接法"></a>散列之分离链接法</h2><a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* <span class="doctag">@author</span> cwx</div><div class="line">* <span class="doctag">@description</span>:散列之分离链接法</div><div class="line">* 缺点：在节点中使用链表，给链表分配地址是需要时间，导致算法速度有所减慢</div><div class="line">* <span class="doctag">@date</span> Created in 19:44 2017/11/19</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeparateChainingHashTable</span>&lt;<span class="title">AnyType</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SeparateChainingHashTable</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>(DEFAULT_TABLE_SIZE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SeparateChainingHashTable</span><span class="params">(<span class="keyword">int</span> size)</span></span>&#123;</div><div class="line">        thelists = <span class="keyword">new</span> LinkedList[nextPrime(size)];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; thelists.length; i++) &#123;</div><div class="line">            thelists[i] = <span class="keyword">new</span> LinkedList&lt;AnyType&gt;();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(AnyType x)</span></span>&#123;</div><div class="line">        List&lt;AnyType&gt; whichList = thelists[myhash(x)];</div><div class="line">        <span class="keyword">if</span> (!whichList.contains(x))&#123;</div><div class="line">            whichList.add(x);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(AnyType x)</span></span>&#123;</div><div class="line">        List&lt;AnyType&gt; whichList = thelists[myhash(x)];</div><div class="line">        <span class="keyword">if</span> (whichList.contains(x))&#123;</div><div class="line">            whichList.remove(x);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(AnyType x)</span></span>&#123;</div><div class="line">        List&lt;AnyType&gt; whichList = thelists[myhash(x)];</div><div class="line">        <span class="keyword">return</span> whichList.contains(x);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeEmpty</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;thelists.length ; i++) &#123;</div><div class="line">            thelists[i].clear();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_TABLE_SIZE = <span class="number">101</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> List&lt;AnyType&gt; [] thelists;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">myhash</span><span class="params">(AnyType x)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> hashVal = x.hashCode();</div><div class="line">        hashVal %= thelists.length;</div><div class="line">        <span class="keyword">if</span> (hashVal &lt; <span class="number">0</span>)&#123;</div><div class="line">            hashVal += thelists.length;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> hashVal;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(!isPrime(n))&#123;</div><div class="line">            n++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> n;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">        <span class="keyword">boolean</span> result = <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; Math.sqrt(n) ; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (n % i == <span class="number">0</span>)&#123;</div><div class="line">                result = <span class="keyword">false</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -380,7 +381,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java基础/" rel="tag"># java基础</a>
+            <a href="/tags/java数据结构/" rel="tag"># java数据结构</a>
           
         </div>
       
@@ -393,14 +394,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/19/AVL树/" rel="next" title="AVL树">
+                <i class="fa fa-chevron-left"></i> AVL树
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/17/Balance/" rel="prev" title="Balance">
-                Balance <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/21/散列之开放地址法/" rel="prev" title="散列之开放地址法">
+                散列之开放地址法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +535,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#史上最好理解的java接口回调"><span class="nav-number">1.</span> <span class="nav-text">史上最好理解的java接口回调</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#散列之分离链接法"><span class="nav-number">1.</span> <span class="nav-text">散列之分离链接法</span></a></li></ol></div>
             
 
           </div>
